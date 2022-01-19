@@ -23,7 +23,7 @@ ENV PATH=/venv/bin/:$PATH
 
 COPY --chown=app:app ./stt/ /app/stt/
 WORKDIR /app
-
+RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm  -O model.pbmm
 EXPOSE 8000
 
 CMD python -m stt.app
