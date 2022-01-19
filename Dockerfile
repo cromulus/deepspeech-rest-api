@@ -5,6 +5,8 @@ RUN pip install -U pip virtualenv \
 
 ENV PATH=/venv/bin/:$PATH
 
+RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm  -O /app/model.pbmm
+
 ADD ./requirements.pip /requirements.pip
 RUN pip install -r /requirements.pip
 
@@ -20,8 +22,6 @@ USER app
 
 COPY --from=build --chown=app:app /venv/ /venv/
 ENV PATH=/venv/bin/:$PATH
-
-RUN wget https://github.com/mozilla/DeepSpeech/releases/download/v0.9.3/deepspeech-0.9.3-models.pbmm  -O /app/model.pbmm
 
 COPY --chown=app:app ./stt/ /app/stt/
 WORKDIR /app
